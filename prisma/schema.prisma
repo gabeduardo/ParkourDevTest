@@ -58,6 +58,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
   profile       Profile? // Relación uno a uno con Profile
+  records       Record[]
 }
 
 model VerificationToken {
@@ -75,6 +76,17 @@ model Profile {
   salario   Float?
   telefono  String?
   direccion String
-  userId    String @unique
-  user      User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String  @unique
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Record {
+  id        String  @id @default(cuid())
+  nombre    String
+  cedula    String
+  telefono  String
+  direccion String?
+  salario   Float?
+  userId    String
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
