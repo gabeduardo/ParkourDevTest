@@ -16,6 +16,7 @@ export const createRecord = async (record: NewRecordParams) => {
     const r = await db.record.create({ data: newRecord });
     return { record: r };
   } catch (err) {
+    // console.log('ENTRA POR ACA')
     const message = (err as Error).message ?? "Error, please try again";
     console.error(message);
     throw { error: message };

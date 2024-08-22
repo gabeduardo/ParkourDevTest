@@ -83,7 +83,7 @@ model Profile {
 model Record {
   id        String  @id @default(cuid())
   nombre    String
-  cedula    String
+  cedula    String  @unique
   telefono  String
   direccion String?
   salario   Float?
