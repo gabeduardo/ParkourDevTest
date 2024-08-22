@@ -3,8 +3,8 @@ import { CompleteUser, relatedUserSchema } from "./index"
 
 export const recordSchema = z.object({
   id: z.string(),
-  nombre: z.string(),
-  cedula: z.string(),
+  nombre: z.string().trim().min(1, { message: "Este campo es obligatorio"}),
+  cedula: z.string().trim().min(1, { message: "Este campo es obligatorio"}),
   telefono: z.string(),
   direccion: z.string().nullish(),
   salario: z.number().nullish(),

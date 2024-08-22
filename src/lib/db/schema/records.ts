@@ -8,11 +8,11 @@ const baseSchema = recordSchema
 
 export const insertRecordSchema = baseSchema.omit({ id: true });
 export const insertRecordParams = baseSchema.extend({
-  salario: z.coerce.number()
+  salario: z.coerce.number().positive({ message: "Este campo debe ser un valor positivo"})
 }).omit({ 
   id: true,
   userId: true
-});
+})
 
 export const updateRecordSchema = baseSchema;
 export const updateRecordParams = updateRecordSchema.extend({
