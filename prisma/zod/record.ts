@@ -1,15 +1,10 @@
 import * as z from "zod"
 import { CompleteUser, relatedUserSchema } from "./index"
 
-const formatoCedula = z.string().regex(/^1-\d{4}-\d{4}$/, {
-  message: "El formato debe ser 1-1234-1234",
-});
-
 export const recordSchema = z.object({
   id: z.string(),
-  nombre: z.string().trim().min(1, { message: "Este campo es obligatorio"}),
-  /// cedula: z.string().trim().min(1, { message: "Este campo es obligatorio"}),
-  cedula: formatoCedula,
+  nombre: z.string(),
+  cedula: z.string(),
   telefono: z.string(),
   direccion: z.string().nullish(),
   salario: z.number().nullish(),

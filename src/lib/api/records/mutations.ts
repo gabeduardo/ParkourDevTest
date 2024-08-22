@@ -40,7 +40,7 @@ export const deleteRecord = async (id: RecordId) => {
   const { session } = await getUserAuth();
   const { id: recordId } = recordIdSchema.parse({ id });
   try {
-    const r = await db.record.delete({ where: { id: recordId, userId: session?.user.id! }})
+    const r = await db.record.delete({ where: { id: recordId }})
     return { record: r };
   } catch (err) {
     const message = (err as Error).message ?? "Error, please try again";
