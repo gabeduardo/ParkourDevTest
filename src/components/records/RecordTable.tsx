@@ -37,6 +37,8 @@ import {
 } from "@/components/ui/table";
 import { CambiarPropiedad, CompleteRecord } from "@/lib/db/schema/records";
 import { record } from "zod";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 type CompleteRecordTable = CambiarPropiedad<CompleteRecord, "salario", string>;
 
@@ -73,7 +75,17 @@ type CompleteRecordTable = CambiarPropiedad<CompleteRecord, "salario", string>;
 export const columns: ColumnDef<CompleteRecordTable>[] = [
   {
     accessorKey: "cedula",
-    header: "Cédula",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Cedula
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
   },
   {
     accessorKey: "nombre",
@@ -90,6 +102,15 @@ export const columns: ColumnDef<CompleteRecordTable>[] = [
   {
     accessorKey: "salario",
     header: "Salario",
+  },
+  {
+    id: "actions",
+    header: "Actions",
+    cell: ({ row }) => (
+      <Button variant={"link"} asChild>
+        <Link href={"/records/" + row.original.id}>Edit</Link>
+      </Button>
+    ),
   },
 ];
 
@@ -235,10 +256,10 @@ export function RecordTable({ records }: { records: CompleteRecordTable[] }) {
         </Table>
       </div>
       <div className="flex items-center justify-end space-x-2 py-4">
-        <div className="flex-1 text-sm text-muted-foreground">
+        {/* <div className="flex-1 text-sm text-muted-foreground">
           {table.getFilteredSelectedRowModel().rows.length} of{" "}
           {table.getFilteredRowModel().rows.length} row(s) selected.
-        </div>
+        </div> */}
         <div className="space-x-2">
           <Button
             variant="outline"

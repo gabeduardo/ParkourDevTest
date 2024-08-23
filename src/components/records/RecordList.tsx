@@ -57,11 +57,11 @@ export default function RecordList({ records }: { records: CompleteRecord[] }) {
         <EmptyState openModal={openModal} />
       ) : (
         <>
-          <ul>
+          {/* <ul>
             {optimisticRecords.map((record) => (
               <Record record={record} key={record.id} openModal={openModal} />
             ))}
-          </ul>
+          </ul> */}
           <RecordTable records={newRecords} />
         </>
       )}
