@@ -10,7 +10,7 @@ export async function POST(request: Request) {
     if (!data.password || data.password.trim() === "") {
       return NextResponse.json(
         {
-          message: "Password cannot be empty",
+          message: "El campo ontraseña es requerido",
         },
         {
           status: 400,
@@ -18,16 +18,16 @@ export async function POST(request: Request) {
       );
     }
 
-    const userFound = await db.user.findUnique({
+    const emailFound = await db.user.findUnique({
       where: {
         email: data.email,
       },
     });
 
-    if (userFound) {
+    if (emailFound) {
       return NextResponse.json(
         {
-          message: "Email already exists",
+          message: "Este correo ya se encuentra en uso",
         },
         {
           status: 400,
@@ -35,22 +35,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const nameFound = await db.user.findUnique({
-      where: {
-        email: data.email,
-      },
-    });
 
-    if (nameFound) {
-      return NextResponse.json(
-        {
-          message: "name already exists",
-        },
-        {
-          status: 400,
-        }
-      );
-    }
 
     const hashedPassword = await bcrypt.hash(data.password, 10);
     const newUser = await db.user.create({

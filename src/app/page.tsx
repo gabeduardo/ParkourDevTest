@@ -4,6 +4,7 @@
  * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
  */
 import Link from "next/link";
+import RegisterPage from "./register/page";
 
 export default function LandingPage() {
   return (
@@ -24,18 +25,17 @@ export default function LandingPage() {
             className="text-sm font-medium hover:underline underline-offset-4"
             href="/sign-in"
           >
-            Iniciar Sesion 
+            Iniciar Sesion
           </Link>
         </nav>
       </header>
       <main className="flex-1">
-   
+        <RegisterPage></RegisterPage>
       </main>
       <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t">
         <p className="text-xs text-neutral-500 dark:text-neutral-400">
           © 2024 Gabriel.
         </p>
-
       </footer>
     </div>
   );

@@ -12,7 +12,7 @@ function RegisterPage() {
 
   const onSubmit = handleSubmit(async (data) => {
     if (data.password !== data.confirmPassword) {
-      return alert("Passwords do not match");
+      return alert("El campo contraseña y confirmar contraseña no coinciden");
     }
 
     const res = await fetch("/api/auth/register", {
@@ -37,10 +37,10 @@ function RegisterPage() {
   return (
     <div className="h-[calc(100vh-7rem)] flex justify-center items-center">
       <form onSubmit={onSubmit} className="w-1/4">
-        <h1 className="text-slate-200 font-bold text-4xl mb-4">Register</h1>
+        <h1 className="text-slate-200 font-bold text-4xl mb-4">Registrarse</h1>
 
         <label htmlFor="username" className="text-slate-500 mb-2 block text-sm">
-          Username:
+          Nombre:
         </label>
         <input
           type="text"
@@ -61,7 +61,7 @@ function RegisterPage() {
         )}
 
         <label htmlFor="email" className="text-slate-500 mb-2 block text-sm">
-          Email:
+          Correo:
         </label>
         <input
           type="email"
@@ -79,7 +79,7 @@ function RegisterPage() {
         )}
 
         <label htmlFor="password" className="text-slate-500 mb-2 block text-sm">
-          Password:
+          Contraseña:
         </label>
         <input
           type="password"
@@ -102,7 +102,7 @@ function RegisterPage() {
           htmlFor="confirmPassword"
           className="text-slate-500 mb-2 block text-sm"
         >
-          Confirm Password:
+          Confirmar Contraseña:
         </label>
         <input
           type="password"
@@ -122,7 +122,7 @@ function RegisterPage() {
         )}
 
         <button className="w-full bg-blue-500 text-white p-3 rounded-lg mt-2">
-          Register
+          Registrarse
         </button>
       </form>
     </div>
