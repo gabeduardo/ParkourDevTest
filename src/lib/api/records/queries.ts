@@ -17,3 +17,27 @@ export const getRecordById = async (id: RecordId) => {
 };
 
 
+// Calculo de salario promedio
+export const calculateAverageSalary = (records: any[]) => {
+  const totalSalary = records.reduce((sum, record) => sum + (record.salario || 0), 0);
+  return totalSalary / records.length;
+};
+
+// func temproal apra generar el reporte
+export const createSalaryReport = async () => {
+  const { records } = await getRecords();
+  const averageSalary = calculateAverageSalary(records);
+
+  return {
+    averageSalary,
+    records,
+  };
+};
+
+// consulta y llamaod de la fcion 
+createSalaryReport().then(report => {
+  console.log("Salario promedio:", report.averageSalary);
+  console.log("Registros:", report.records);
+}).catch(error => {
+  console.error("Error al crear el reporte:", error);
+});

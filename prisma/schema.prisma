@@ -59,6 +59,7 @@ model User {
   sessions      Session[]
   profile       Profile? // Relación uno a uno con Profile
   records       Record[]
+  password      String?   // Campo opcional para la contraseña
 }
 
 model VerificationToken {
