@@ -25,10 +25,10 @@ const Records = async () => {
   await checkAuth();
 
   const { records } = await getRecords();
-  
+
   return (
     <Suspense fallback={<Loading />}>
-      <RecordList records={records}  />
+      <RecordList records={records} />
     </Suspense>
   );
 };

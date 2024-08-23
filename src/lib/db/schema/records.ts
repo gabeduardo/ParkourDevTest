@@ -37,3 +37,6 @@ export type RecordId = z.infer<typeof recordIdSchema>["id"];
 // this type infers the return from getRecords() - meaning it will include any joins
 export type CompleteRecord = Awaited<ReturnType<typeof getRecords>>["records"][number];
 
+export type CambiarPropiedad<T, K extends keyof T, U> = {
+  [P in keyof T]: P extends K ? U : T[P];
+};

@@ -12,20 +12,15 @@ import { useOptimisticRecords } from "@/app/(app)/records/useOptimisticRecords";
 import { Button } from "@/components/ui/button";
 import RecordForm from "./RecordForm";
 import { PlusIcon } from "lucide-react";
+import { RecordTable } from "./RecordTable";
 
 type TOpenModal = (record?: Record) => void;
 
-export default function RecordList({
-  records,
-   
-}: {
-  records: CompleteRecord[];
-   
-}) {
-  const { optimisticRecords, addOptimisticRecord } = useOptimisticRecords(
-    records,
-     
-  );
+export default function RecordList({ records }: { records: CompleteRecord[] }) {
+  const { optimisticRecords, addOptimisticRecord } =
+    useOptimisticRecords(records);
+  console.log("records", records);
+
   const [open, setOpen] = useState(false);
   const [activeRecord, setActiveRecord] = useState<Record | null>(null);
   const openModal = (record?: Record) => {
@@ -33,6 +28,11 @@ export default function RecordList({
     record ? setActiveRecord(record) : setActiveRecord(null);
   };
   const closeModal = () => setOpen(false);
+  Record;
+  const newRecords = records.map(({ salario, ...record }) => ({
+    ...record,
+    salario: salario?.toString() ?? "",
+  }));
 
   return (
     <div>
@@ -46,7 +46,6 @@ export default function RecordList({
           addOptimistic={addOptimisticRecord}
           openModal={openModal}
           closeModal={closeModal}
-          
         />
       </Modal>
       <div className="absolute right-0 top-0 ">
@@ -57,15 +56,14 @@ export default function RecordList({
       {optimisticRecords.length === 0 ? (
         <EmptyState openModal={openModal} />
       ) : (
-        <ul>
-          {optimisticRecords.map((record) => (
-            <Record
-              record={record}
-              key={record.id}
-              openModal={openModal}
-            />
-          ))}
-        </ul>
+        <>
+          <ul>
+            {optimisticRecords.map((record) => (
+              <Record record={record} key={record.id} openModal={openModal} />
+            ))}
+          </ul>
+          <RecordTable records={newRecords} />
+        </>
       )}
     </div>
   );
@@ -86,22 +84,19 @@ const Record = ({
     ? pathname
     : pathname + "/records/";
 
-
   return (
     <li
       className={cn(
         "flex justify-between my-2",
         mutating ? "opacity-30 animate-pulse" : "",
-        deleting ? "text-destructive" : "",
+        deleting ? "text-destructive" : ""
       )}
     >
       <div className="w-full">
         <div>{record.nombre}</div>
       </div>
       <Button variant={"link"} asChild>
-        <Link href={ basePath + "/" + record.id }>
-          Edit
-        </Link>
+        <Link href={basePath + "/" + record.id}>Edit</Link>
       </Button>
     </li>
   );
@@ -118,7 +113,8 @@ const EmptyState = ({ openModal }: { openModal: TOpenModal }) => {
       </p>
       <div className="mt-6">
         <Button onClick={() => openModal()}>
-          <PlusIcon className="h-4" /> New Records </Button>
+          <PlusIcon className="h-4" /> New Records{" "}
+        </Button>
       </div>
     </div>
   );
