@@ -57,11 +57,6 @@ export default function RecordList({ records }: { records: CompleteRecord[] }) {
         <EmptyState openModal={openModal} />
       ) : (
         <>
-          {/* <ul>
-            {optimisticRecords.map((record) => (
-              <Record record={record} key={record.id} openModal={openModal} />
-            ))}
-          </ul> */}
           <RecordTable records={newRecords} />
         </>
       )}

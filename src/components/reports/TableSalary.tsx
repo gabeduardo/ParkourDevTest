@@ -40,6 +40,7 @@ export function TableSalary({ records }: { records: any[] }) {
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
   );
+
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = React.useState({});
@@ -65,9 +66,6 @@ export function TableSalary({ records }: { records: any[] }) {
 
   return (
     <div className="w-full">
-      <div className="flex items-center py-4">
-        <div className="flex gap-2"></div>
-      </div>
       <div className="rounded-md border">
         <Table>
           <TableHeader>

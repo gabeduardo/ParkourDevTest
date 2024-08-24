@@ -39,6 +39,7 @@ import { CambiarPropiedad, CompleteRecord } from "@/lib/db/schema/records";
 import { record } from "zod";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useIntl, FormattedMessage } from "react-intl";
 
 type CompleteRecordTable = CambiarPropiedad<CompleteRecord, "salario", string>;
 
@@ -141,6 +142,7 @@ export function RecordTable({ records }: { records: CompleteRecordTable[] }) {
       rowSelection,
     },
   });
+  const { formatMessage } = useIntl();
 
   const handleFilter = (id: string) => {
     table.getColumn(filter)?.setFilterValue("");
@@ -149,6 +151,7 @@ export function RecordTable({ records }: { records: CompleteRecordTable[] }) {
 
   return (
     <div className="w-full">
+      {formatMessage({ id: "welcome" })}
       <div className="flex items-center py-4">
         <div className="flex gap-2">
           <Input
