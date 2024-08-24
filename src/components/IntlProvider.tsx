@@ -1,25 +1,55 @@
+import React, { createContext, useState, useContext, ReactNode } from "react";
 import { IntlProvider } from "react-intl";
-import enMessages from "../../public/locales/en.json";
-import esMessages from "../../public/locales/es.json";
-import { ReactNode } from "react";
+import messagesEn from "../../public/locales/en.json";
+import messagesEs from "../../public/locales/es.json";
 
-const messages = {
-  en: enMessages,
-  es: esMessages,
+type LanguageOption = {
+  key: string;
+  label: string;
 };
 
-interface IntlProviderWrapperProps {
-  children: ReactNode;
-  locale: "en" | "es";
+interface LanguageContextProps {
+  locale: string;
+  languages: { [key: string]: LanguageOption };
+  changeLanguage: (newLocale: string) => void;
 }
 
-const IntlProviderWrapper: React.FC<IntlProviderWrapperProps> = ({
-  children,
-  locale,
-}) => (
-  <IntlProvider locale={locale} messages={messages[locale]}>
-    {children}
-  </IntlProvider>
+const LanguageContext = createContext<LanguageContextProps | undefined>(
+  undefined
 );
 
-export default IntlProviderWrapper;
+const languages = {
+  es: { key: "es", label: "Español" },
+  en: { key: "en", label: "English" },
+};
+
+const messages: { [key: string]: any } = {
+  en: messagesEn,
+  es: messagesEs,
+};
+
+export const LanguageProvider: React.FC<{ children: ReactNode }> = ({
+  children,
+}) => {
+  const [locale, setLocale] = useState<string>("en");
+
+  const changeLanguage = (newLocale: string) => {
+    setLocale(newLocale);
+  };
+
+  return (
+    <LanguageContext.Provider value={{ locale, changeLanguage, languages }}>
+      <IntlProvider locale={locale} messages={messages[locale]}>
+        {children}
+      </IntlProvider>
+    </LanguageContext.Provider>
+  );
+};
+
+export const useLanguage = (): LanguageContextProps => {
+  const context = useContext(LanguageContext);
+  if (!context) {
+    throw new Error("useLanguage must be used within a LanguageProvider");
+  }
+  return context;
+};
