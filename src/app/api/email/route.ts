@@ -13,7 +13,7 @@ export async function POST(request: Request) {
   console.log('url de verificacion', verificationUrl)
   try {
     const data = await resend.emails.send({
-      from: "Kirimase <onboarding@resend.dev>",
+      from: "Gabriel <onboarding@resend.dev>",
       to: [email],
       subject: "Verifica tu correo electrónico",
       react: EmailTemplate({ firstName: name, verificationUrl }),

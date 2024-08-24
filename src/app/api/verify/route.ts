@@ -3,7 +3,6 @@ import { verify } from 'jsonwebtoken';
 import { db } from "@/lib/db/index";
 import { NextResponse } from 'next/server';
 
-
 export async function GET(req: NextApiRequest, res: NextApiResponse) {
   console.log('verificando', req.url);
   
@@ -23,14 +22,7 @@ export async function GET(req: NextApiRequest, res: NextApiResponse) {
       where: { id: userId },
       data: { emailVerified: new Date() },
     });
-    return NextResponse.json(
-      {
-        message: "usuario verificado con exito",
-      },
-      {
-        status: 302,
-      }
-    );
+    return NextResponse.redirect(new URL('/dashboard', req.url));
   } catch (error) {
     return NextResponse.json(
       {
