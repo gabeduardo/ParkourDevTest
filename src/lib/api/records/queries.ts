@@ -1,6 +1,6 @@
 import { db } from "@/lib/db/index";
 import { getUserAuth } from "@/lib/auth/utils";
-import { type RecordId, recordIdSchema } from "@/lib/db/schema/records";
+import { type RecordId, recordIdSchema, Record } from "@/lib/db/schema/records";
 
 export const getRecords = async () => {
   const { session } = await getUserAuth();
@@ -16,7 +16,7 @@ export const getRecordById = async (id: RecordId) => {
   return { record: r };
 };
 // metodo apra el salario promedio
-export const calculateAverageSalary = (records) => {
+export const calculateAverageSalary = (records: Record[]) => {
   const totalSalary = records.reduce((sum, record) => sum + (record.salario || 0), 0);
   return totalSalary / records.length;
 };
@@ -27,7 +27,7 @@ export const createSalaryReport = async (n) => {
   const averageSalary = calculateAverageSalary(records);
 
   // Ordena registros y slice para ordenarlo por mejor salario 
-  const topNSalaries = records.sort((a, b) => b.salario - a.salario).slice(0, n);
+  const topNSalaries = records.sort((a, b) => (b.salario ?? 0) - (a.salario ?? 0)).slice(0, n);
 
   return {
     averageSalary,
