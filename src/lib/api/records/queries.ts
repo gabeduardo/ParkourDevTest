@@ -22,7 +22,7 @@ export const calculateAverageSalary = (records: Record[]) => {
 };
 
 // Función que me genera los reportes 
-export const createSalaryReport = async (n) => {
+export const createSalaryReport = async (n: number) => {
   const { records } = await getRecords();
   const averageSalary = calculateAverageSalary(records);
 
