@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import bcrypt from "bcrypt";
 import { db } from "@/lib/db/index";
 
+import { sign } from 'jsonwebtoken';
 export async function POST(request: Request) {
   try {
     const data = await request.json();
@@ -71,3 +72,14 @@ export async function POST(request: Request) {
         }
     }
 }
+
+
+
+function generateVerificationUrl(userId) {
+  const token = sign({ userId }, 'tu_secreto', { expiresIn: '8h' });
+  return `http://localhost:3000/api/verify?token=${token}`;
+}
+
+export { generateVerificationUrl };
+
+
