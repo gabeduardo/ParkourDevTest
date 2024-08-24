@@ -15,29 +15,31 @@ export const getRecordById = async (id: RecordId) => {
     where: { id: recordId, userId: session?.user.id!}});
   return { record: r };
 };
-
-
-// Calculo de salario promedio
-export const calculateAverageSalary = (records: any[]) => {
+// metodo apra el salario promedio
+export const calculateAverageSalary = (records) => {
   const totalSalary = records.reduce((sum, record) => sum + (record.salario || 0), 0);
   return totalSalary / records.length;
 };
 
-// func temproal apra generar el reporte
-export const createSalaryReport = async () => {
+// Función que me genera los reportes 
+export const createSalaryReport = async (n) => {
   const { records } = await getRecords();
   const averageSalary = calculateAverageSalary(records);
 
+  // Ordena registros y slice para ordenarlo por mejor salario 
+  const topNSalaries = records.sort((a, b) => b.salario - a.salario).slice(0, n);
+
   return {
     averageSalary,
-    records,
+    records: topNSalaries,
   };
 };
 
-// consulta y llamaod de la fcion 
-createSalaryReport().then(report => {
-  console.log("Salario promedio:", report.averageSalary);
-  console.log("Registros:", report.records);
-}).catch(error => {
-  console.error("Error al crear el reporte:", error);
-});
+
+// // consulta y llamaod de la fcion 
+// createSalaryReport().then(report => {
+//   console.log("Salario promedio:", report.averageSalary);
+//   console.log("Registros:", report.records);
+// }).catch(error => {
+//   console.error("Error al crear el reporte:", error);
+// });
