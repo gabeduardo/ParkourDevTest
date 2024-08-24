@@ -1,22 +1,15 @@
 import { z } from "zod";
-
 import { useState, useTransition } from "react";
 import { useFormStatus } from "react-dom";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { useValidatedForm } from "@/lib/hooks/useValidatedForm";
-
 import { type Action, cn } from "@/lib/utils";
 import { type TAddOptimistic } from "@/app/(app)/records/useOptimisticRecords";
-
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { useBackPath } from "@/components/shared/BackButton";
-
-
-
-
 import { type Record, insertRecordParams } from "@/lib/db/schema/records";
 import {
   createRecordAction,
@@ -24,9 +17,7 @@ import {
   updateRecordAction,
 } from "@/lib/actions/records";
 
-
 const RecordForm = ({
-  
   record,
   openModal,
   closeModal,
@@ -34,7 +25,7 @@ const RecordForm = ({
   postSuccess,
 }: {
   record?: Record | null;
-  
+
   openModal?: (record?: Record) => void;
   closeModal?: () => void;
   addOptimistic?: TAddOptimistic;
@@ -43,17 +34,16 @@ const RecordForm = ({
   const { errors, hasErrors, setErrors, handleChange } =
     useValidatedForm<Record>(insertRecordParams);
   const editing = !!record?.id;
-  
+
   const [isDeleting, setIsDeleting] = useState(false);
   const [pending, startMutation] = useTransition();
 
   const router = useRouter();
   const backpath = useBackPath("records");
 
-
   const onSuccess = (
     action: Action,
-    data?: { error: string; values: Record },
+    data?: { error: string; values: Record }
   ) => {
     const failed = Boolean(data?.error);
     if (failed) {
@@ -73,7 +63,9 @@ const RecordForm = ({
     setErrors(null);
 
     const payload = Object.fromEntries(data.entries());
-    const recordParsed = await insertRecordParams.safeParseAsync({  ...payload });
+    const recordParsed = await insertRecordParams.safeParseAsync({
+      ...payload,
+    });
     if (!recordParsed.success) {
       setErrors(recordParsed?.error.flatten().fieldErrors);
       return;
@@ -82,17 +74,17 @@ const RecordForm = ({
     closeModal && closeModal();
     const values = recordParsed.data;
     const pendingRecord: Record = {
-      
       id: record?.id ?? "",
       userId: record?.userId ?? "",
       ...values,
     };
     try {
       startMutation(async () => {
-        addOptimistic && addOptimistic({
-          data: pendingRecord,
-          action: editing ? "update" : "create",
-        });
+        addOptimistic &&
+          addOptimistic({
+            data: pendingRecord,
+            action: editing ? "update" : "create",
+          });
 
         const error = editing
           ? await updateRecordAction({ ...values, id: record.id })
@@ -100,11 +92,11 @@ const RecordForm = ({
 
         const errorFormatted = {
           error: error ?? "Error",
-          values: pendingRecord 
+          values: pendingRecord,
         };
         onSuccess(
           editing ? "update" : "create",
-          error ? errorFormatted : undefined,
+          error ? errorFormatted : undefined
         );
       });
     } catch (e) {
@@ -117,11 +109,11 @@ const RecordForm = ({
   return (
     <form action={handleSubmit} onChange={handleChange} className={"space-y-8"}>
       {/* Schema fields start */}
-              <div>
+      <div>
         <Label
           className={cn(
             "mb-2 inline-block",
-            errors?.nombre ? "text-destructive" : "",
+            errors?.nombre ? "text-destructive" : ""
           )}
         >
           Nombre
@@ -138,11 +130,11 @@ const RecordForm = ({
           <div className="h-6" />
         )}
       </div>
-        <div>
+      <div>
         <Label
           className={cn(
             "mb-2 inline-block",
-            errors?.cedula ? "text-destructive" : "",
+            errors?.cedula ? "text-destructive" : ""
           )}
         >
           Cedula
@@ -159,11 +151,11 @@ const RecordForm = ({
           <div className="h-6" />
         )}
       </div>
-        <div>
+      <div>
         <Label
           className={cn(
             "mb-2 inline-block",
-            errors?.telefono ? "text-destructive" : "",
+            errors?.telefono ? "text-destructive" : ""
           )}
         >
           Telefono
@@ -180,11 +172,11 @@ const RecordForm = ({
           <div className="h-6" />
         )}
       </div>
-        <div>
+      <div>
         <Label
           className={cn(
             "mb-2 inline-block",
-            errors?.direccion ? "text-destructive" : "",
+            errors?.direccion ? "text-destructive" : ""
           )}
         >
           Direccion
@@ -201,11 +193,11 @@ const RecordForm = ({
           <div className="h-6" />
         )}
       </div>
-        <div>
+      <div>
         <Label
           className={cn(
             "mb-2 inline-block",
-            errors?.salario ? "text-destructive" : "",
+            errors?.salario ? "text-destructive" : ""
           )}
         >
           Salario
@@ -237,7 +229,8 @@ const RecordForm = ({
             setIsDeleting(true);
             closeModal && closeModal();
             startMutation(async () => {
-              addOptimistic && addOptimistic({ action: "delete", data: record });
+              addOptimistic &&
+                addOptimistic({ action: "delete", data: record });
               const error = await deleteRecordAction(record.id);
               setIsDeleting(false);
               const errorFormatted = {
