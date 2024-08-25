@@ -2,7 +2,7 @@
 import Link from "next/link";
 import LanguageSelector from "./shared/LanguageSelector";
 import { FormattedMessage } from "react-intl";
-import { Avatar, AvatarFallback } from "./ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Button } from "./ui/button";
 import {
   DropdownMenu,
@@ -28,6 +28,7 @@ interface NavBarProps {
 }
 
 const NavBar = ({ withAuth, navBarOptions, user }: NavBarProps) => {
+  console.log("user", user);
   return (
     <header className="px-4 lg:px-6 h-14 flex items-center bg-slate-100 border-b">
       {!withAuth && (
@@ -56,6 +57,7 @@ const NavBar = ({ withAuth, navBarOptions, user }: NavBarProps) => {
             <DropdownMenuTrigger asChild>
               <Button className="bg-transparent w-fit p-0 hover:bg-transparent focus:bg-none focus:shadow-none border-none focus-visible:shadow-none focus-visible:border-none">
                 <Avatar className="h-10 w-10 opacity-70 hover:opacity-100 transition-all">
+                  <AvatarImage src={user.image} />
                   <AvatarFallback className="border-border border-2 text-muted-foreground">
                     {user.name
                       ? user.name

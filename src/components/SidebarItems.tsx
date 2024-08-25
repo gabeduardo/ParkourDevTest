@@ -50,7 +50,7 @@ const SidebarLink = ({ navBarOption, active }: SidebarLinkProps) => {
   return (
     <Link
       href={url}
-      className={`group transition-colors p-2 inline-block hover:bg-popover hover:text-primary text-muted-foreground text-xs hover:shadow rounded-md w-full${
+      className={`group transition-colors p-2 my-2 inline-block hover:bg-popover hover:text-primary text-muted-foreground text-sm hover:shadow rounded-md w-full${
         active ? " text-primary font-semibold" : ""
       }`}
     >

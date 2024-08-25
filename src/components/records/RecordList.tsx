@@ -46,18 +46,20 @@ export default function RecordList({ records }: { records: CompleteRecord[] }) {
           closeModal={closeModal}
         />
       </Modal>
-      <div className="absolute right-0 top-0 ">
-        <Button onClick={() => openModal()} variant={"outline"}>
-          +
-        </Button>
+      <div className="w-full">
+        <div className="absolute right-0 top-0 ">
+          <Button onClick={() => openModal()} variant={"outline"}>
+            +
+          </Button>
+        </div>
+        {optimisticRecords.length === 0 ? (
+          <EmptyState openModal={openModal} />
+        ) : (
+          <>
+            <RecordTable records={newRecords} />
+          </>
+        )}
       </div>
-      {optimisticRecords.length === 0 ? (
-        <EmptyState openModal={openModal} />
-      ) : (
-        <>
-          <RecordTable records={newRecords} />
-        </>
-      )}
     </div>
   );
 }
