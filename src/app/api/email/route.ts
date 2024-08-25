@@ -2,7 +2,7 @@ import { EmailTemplate } from "@/components/emails/FirstEmail";
 import { resend } from "@/lib/email/index";
 import { emailSchema } from "@/lib/email/utils";
 import { NextResponse } from "next/server";
-import { generateVerificationUrl } from "../auth/register/route";
+import { generateVerificationUrl } from "@/lib/authUtils";
 
 export async function POST(request: Request) {
 
