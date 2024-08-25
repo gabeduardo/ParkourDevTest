@@ -27,7 +27,8 @@
       ],
       "@/zodAutoGenSchemas": [
         "./prisma/zod/index"
-      ]
+      ],
+      "@/components/*": ["src/components/*"]
     },
     "baseUrl": "./"
   },
