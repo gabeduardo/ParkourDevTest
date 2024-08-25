@@ -107,144 +107,150 @@ const RecordForm = ({
   };
 
   return (
-    <form action={handleSubmit} onChange={handleChange} className={"space-y-8"}>
-      {/* Schema fields start */}
-      <div>
-        <Label
-          className={cn(
-            "mb-2 inline-block",
-            errors?.nombre ? "text-destructive" : ""
+    <form
+      action={handleSubmit}
+      onChange={handleChange}
+      className="flex flex-col gap-2"
+    >
+      <div className="pb-4">
+        <div>
+          <Label
+            className={cn(
+              "mb-2 inline-block",
+              errors?.nombre ? "text-destructive" : ""
+            )}
+          >
+            Nombre
+          </Label>
+          <Input
+            type="text"
+            name="nombre"
+            className={cn(errors?.nombre ? "ring ring-destructive" : "")}
+            defaultValue={record?.nombre ?? ""}
+          />
+          {errors?.nombre ? (
+            <p className="text-xs text-destructive mt-2">{errors.nombre[0]}</p>
+          ) : (
+            <div className="h-6" />
           )}
-        >
-          Nombre
-        </Label>
-        <Input
-          type="text"
-          name="nombre"
-          className={cn(errors?.nombre ? "ring ring-destructive" : "")}
-          defaultValue={record?.nombre ?? ""}
-        />
-        {errors?.nombre ? (
-          <p className="text-xs text-destructive mt-2">{errors.nombre[0]}</p>
-        ) : (
-          <div className="h-6" />
-        )}
-      </div>
-      <div>
-        <Label
-          className={cn(
-            "mb-2 inline-block",
-            errors?.cedula ? "text-destructive" : ""
+        </div>
+        <div>
+          <Label
+            className={cn(
+              "mb-2 inline-block",
+              errors?.cedula ? "text-destructive" : ""
+            )}
+          >
+            Cedula
+          </Label>
+          <Input
+            type="text"
+            name="cedula"
+            className={cn(errors?.cedula ? "ring ring-destructive" : "")}
+            defaultValue={record?.cedula ?? ""}
+          />
+          {errors?.cedula ? (
+            <p className="text-xs text-destructive mt-2">{errors.cedula[0]}</p>
+          ) : (
+            <div className="h-6" />
           )}
-        >
-          Cedula
-        </Label>
-        <Input
-          type="text"
-          name="cedula"
-          className={cn(errors?.cedula ? "ring ring-destructive" : "")}
-          defaultValue={record?.cedula ?? ""}
-        />
-        {errors?.cedula ? (
-          <p className="text-xs text-destructive mt-2">{errors.cedula[0]}</p>
-        ) : (
-          <div className="h-6" />
-        )}
-      </div>
-      <div>
-        <Label
-          className={cn(
-            "mb-2 inline-block",
-            errors?.telefono ? "text-destructive" : ""
+        </div>
+        <div>
+          <Label
+            className={cn(
+              "mb-2 inline-block",
+              errors?.telefono ? "text-destructive" : ""
+            )}
+          >
+            Telefono
+          </Label>
+          <Input
+            type="text"
+            name="telefono"
+            className={cn(errors?.telefono ? "ring ring-destructive" : "")}
+            defaultValue={record?.telefono ?? ""}
+          />
+          {errors?.telefono ? (
+            <p className="text-xs text-destructive mt-2">
+              {errors.telefono[0]}
+            </p>
+          ) : (
+            <div className="h-6" />
           )}
-        >
-          Telefono
-        </Label>
-        <Input
-          type="text"
-          name="telefono"
-          className={cn(errors?.telefono ? "ring ring-destructive" : "")}
-          defaultValue={record?.telefono ?? ""}
-        />
-        {errors?.telefono ? (
-          <p className="text-xs text-destructive mt-2">{errors.telefono[0]}</p>
-        ) : (
-          <div className="h-6" />
-        )}
-      </div>
-      <div>
-        <Label
-          className={cn(
-            "mb-2 inline-block",
-            errors?.direccion ? "text-destructive" : ""
+        </div>
+        <div>
+          <Label
+            className={cn(
+              "mb-2 inline-block",
+              errors?.direccion ? "text-destructive" : ""
+            )}
+          >
+            Direccion
+          </Label>
+          <Input
+            type="text"
+            name="direccion"
+            className={cn(errors?.direccion ? "ring ring-destructive" : "")}
+            defaultValue={record?.direccion ?? ""}
+          />
+          {errors?.direccion ? (
+            <p className="text-xs text-destructive mt-2">
+              {errors.direccion[0]}
+            </p>
+          ) : (
+            <div className="h-6" />
           )}
-        >
-          Direccion
-        </Label>
-        <Input
-          type="text"
-          name="direccion"
-          className={cn(errors?.direccion ? "ring ring-destructive" : "")}
-          defaultValue={record?.direccion ?? ""}
-        />
-        {errors?.direccion ? (
-          <p className="text-xs text-destructive mt-2">{errors.direccion[0]}</p>
-        ) : (
-          <div className="h-6" />
-        )}
-      </div>
-      <div>
-        <Label
-          className={cn(
-            "mb-2 inline-block",
-            errors?.salario ? "text-destructive" : ""
+        </div>
+        <div>
+          <Label
+            className={cn(
+              "mb-2 inline-block",
+              errors?.salario ? "text-destructive" : ""
+            )}
+          >
+            Salario
+          </Label>
+          <Input
+            type="text"
+            name="salario"
+            className={cn(errors?.salario ? "ring ring-destructive" : "")}
+            defaultValue={record?.salario ?? ""}
+          />
+          {errors?.salario ? (
+            <p className="text-xs text-destructive mt-2">{errors.salario[0]}</p>
+          ) : (
+            <div className="h-6" />
           )}
-        >
-          Salario
-        </Label>
-        <Input
-          type="text"
-          name="salario"
-          className={cn(errors?.salario ? "ring ring-destructive" : "")}
-          defaultValue={record?.salario ?? ""}
-        />
-        {errors?.salario ? (
-          <p className="text-xs text-destructive mt-2">{errors.salario[0]}</p>
-        ) : (
-          <div className="h-6" />
-        )}
+        </div>
       </div>
-      {/* Schema fields end */}
+      <div className="flex">
+        <SaveButton errors={hasErrors} editing={editing} />
+        {editing ? (
+          <Button
+            type="button"
+            disabled={isDeleting || pending || hasErrors}
+            variant={"destructive"}
+            onClick={() => {
+              setIsDeleting(true);
+              closeModal && closeModal();
+              startMutation(async () => {
+                addOptimistic &&
+                  addOptimistic({ action: "delete", data: record });
+                const error = await deleteRecordAction(record.id);
+                setIsDeleting(false);
+                const errorFormatted = {
+                  error: error ?? "Error",
+                  values: record,
+                };
 
-      {/* Save Button */}
-      <SaveButton errors={hasErrors} editing={editing} />
-
-      {/* Delete Button */}
-      {editing ? (
-        <Button
-          type="button"
-          disabled={isDeleting || pending || hasErrors}
-          variant={"destructive"}
-          onClick={() => {
-            setIsDeleting(true);
-            closeModal && closeModal();
-            startMutation(async () => {
-              addOptimistic &&
-                addOptimistic({ action: "delete", data: record });
-              const error = await deleteRecordAction(record.id);
-              setIsDeleting(false);
-              const errorFormatted = {
-                error: error ?? "Error",
-                values: record,
-              };
-
-              onSuccess("delete", error ? errorFormatted : undefined);
-            });
-          }}
-        >
-          Delet{isDeleting ? "ing..." : "e"}
-        </Button>
-      ) : null}
+                onSuccess("delete", error ? errorFormatted : undefined);
+              });
+            }}
+          >
+            Delet{isDeleting ? "ing..." : "e"}
+          </Button>
+        ) : null}
+      </div>
     </form>
   );
 };
