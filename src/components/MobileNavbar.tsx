@@ -5,11 +5,11 @@ import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { AlignRight } from "lucide-react";
-import { NavBarOptions } from "./NavBar";
+// import { NavBarOptions } from "./NavBar";
 
 type MobileNavbarProps = {
   withAuth?: boolean;
-  navBarOptions: NavBarOptions[];
+  navBarOptions: any;
 };
 
 const MobileNavbar = ({ navBarOptions }: MobileNavbarProps) => {
@@ -26,7 +26,7 @@ const MobileNavbar = ({ navBarOptions }: MobileNavbarProps) => {
       {open ? (
         <div className="my-4 p-4 bg-muted">
           <ul className="space-y-2">
-            {navBarOptions.map(({ label, url }) => (
+            {/* {navBarOptions.map(({ label, url }) => (
               <li key={label} onClick={() => setOpen(false)} className="">
                 <Link
                   href={url}
@@ -39,7 +39,7 @@ const MobileNavbar = ({ navBarOptions }: MobileNavbarProps) => {
                   {label}
                 </Link>
               </li>
-            ))}
+            ))} */}
           </ul>
         </div>
       ) : null}
