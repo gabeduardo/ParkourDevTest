@@ -5,8 +5,8 @@ import { getRecords } from "@/lib/api/records/queries";
 
 // Schema for records - used to validate API requests
 const baseSchema = recordSchema
-const formatoCedula = z.string().regex(/^1-\d{4}-\d{4}$/, {
-  message: "El formato debe ser 1-1234-1234",
+const formatoCedula =z.string().regex(/^\d-\d{3}-\d{3}$/, {
+  message: "El formato debe ser 1-123-123",
 });
 
 export const insertRecordSchema = baseSchema.omit({ id: true });

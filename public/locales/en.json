@@ -15,5 +15,6 @@
   "address": "Address",
   "salary": "Salary",
   "actions": "Actions",
-  "filter_action": "Filter"
+  "filter_action": "Filter",
+  "Confirm Email": "Confirm Email"
 }

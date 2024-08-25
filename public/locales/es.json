@@ -15,5 +15,6 @@
   "address": "Dirección",
   "salary": "Salario",
   "actions": "Acciones",
-  "filter_action": "Filtrar"
+  "filter_action": "Filtrar",
+  "Confirm Email": "Confirmar Correo"
 }
