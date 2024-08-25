@@ -1,3 +1,4 @@
+"use client";
 import * as React from "react";
 import {
   Card,
@@ -6,6 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { FormattedMessage } from "react-intl";
 
 export function CardSalary({ averageSalary }: { averageSalary: number }) {
   return (
@@ -69,7 +71,9 @@ export function CardSalary({ averageSalary }: { averageSalary: number }) {
             />
           </g>
         </svg> */}
-        <CardDescription>Promedio</CardDescription>
+        <CardDescription>
+          <FormattedMessage id={"register_average"} />
+        </CardDescription>
         <CardTitle>{averageSalary.toFixed(2)}</CardTitle>
       </CardHeader>
     </Card>

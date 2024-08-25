@@ -1,6 +1,7 @@
 "use client";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { Button } from "@/components/ui/button";
+import { FormattedMessage } from "react-intl";
 
 export default function SignIn() {
   const { data: session, status } = useSession();
@@ -11,11 +12,14 @@ export default function SignIn() {
     return (
       <div className="space-y-3">
         <p>
-          Signed in as{" "}
+          <FormattedMessage id={"register_session_dashboard_message"} />{" "}
           <span className="font-medium">{session.user?.email}</span>
         </p>
-        <Button variant={"destructive"} onClick={() => signOut({ callbackUrl: "/" })}>
-          Sign out
+        <Button
+          variant={"destructive"}
+          onClick={() => signOut({ callbackUrl: "/" })}
+        >
+          <FormattedMessage id={"register_signout"} />
         </Button>
       </div>
     );

@@ -1,5 +1,12 @@
 {
   "welcome": "Bienvenido",
   "register_action": "Registrarse",
-  "login_action": "Iniciar Sesión"
+  "login_action": "Iniciar Sesión ",
+  "Dashboard": "Panel",
+  "Records": "Información",
+  "Reports": "Reportes",
+  "register_average": "Promedio",
+  "register_register_message": "Registrarse",
+  "register_signout": "Cerrar sesión",
+  "register_session_dashboard_message": " Sesión iniciada como"
 }

@@ -1,6 +1,7 @@
 "use client";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
+import { FormattedMessage } from "react-intl";
 
 const RegisterForm = () => {
   const {
@@ -113,7 +114,7 @@ const RegisterForm = () => {
       )}
       <div className="w-full flex items-center justify-center">
         <button className="w-full md:w-auto px-6 bg-blue-500 text-white p-3 rounded-lg mt-2">
-          Registrarse
+          <FormattedMessage id={"register_register_message"} />
         </button>
       </div>
     </form>

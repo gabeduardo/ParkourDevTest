@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { FormattedMessage } from "react-intl";
 
 export default function SignOutBtn() {
   const router = useRouter();
@@ -18,7 +19,7 @@ export default function SignOutBtn() {
   };
   return (
     <button onClick={handleSignOut} className="w-full text-left">
-      Sign out
+      <FormattedMessage id={"register_signout"} />
     </button>
   );
 }
