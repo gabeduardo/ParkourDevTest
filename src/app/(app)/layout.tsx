@@ -17,6 +17,7 @@ export default async function AppLayout({
 }: {
   children: React.ReactNode;
 }) {
+  await checkAuth();
   const session = await getUserAuth();
   if (session.session === null) return null;
   const { user }: any = session.session;

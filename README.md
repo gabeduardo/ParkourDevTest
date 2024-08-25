@@ -1,19 +1,26 @@
 # Prueba técnica Gabriel
 
 1.  Clonar el repositorio
-2.  Instalar dependencias con npm install
-3.  colocar las variables de entorno correspondientes en el archivo.env
-    ` DATABASE_URL
-NEXTAUTH_SECRET
-NEXTAUTH_URL
-GOOGLE_CLIENT_ID
-GOOGLE_CLIENT_SECRET
-RESEND_API_KEY`
+2.  Instalar dependencias con `npm install`
+3.  Se debe crear una base de datos postgresql para posteriormente llenar la variable de entorno DATABASE_URL
+4.  Colocar las variables de entorno correspondientes creando un archivo .env generar las APIKEY de sus correspondientes sitios en la raíz del proyecto el cual debe contener las siguientes variables de entorno
 
-4.  Ejecutar
+    ```
+    DATABASE_URL=postgres://postgres:{contraseña}@localhost:5432/{nombre de la base de datos}
+    NEXTAUTH_SECRET={APIKEY_NEXTAUTH_SECRET}
+    NEXTAUTH_URL=http://localhost:3000
+    GOOGLE_CLIENT_ID={APIKEY_GOOGLE_CLIENT_ID}
+    GOOGLE_CLIENT_SECRET={APIKEY_GOOGLE_CLIENT_SECRET}
+    RESEND_API_KEY={APIKEY_RESEND_API_KEY}
+    ``
 
-`npm db:generate ` y luego ` npm db:push` o ` npm db:migrate` para generar las tablas de base de datos
-Iniciar el servidor con `npm run dev`
+    ```
+
+5.  Ejecutar
+
+`npm db:generate ` y luego ` npm db:migrate` para generar las tablas de base de datos
+
+6.  Iniciar el servidor con `npm run dev`
 
 ## Documentación de los requerimientos mínimos
 
@@ -57,10 +64,10 @@ Reporte de salarios promedios y top 5 de los mejores salarios
 
 ### En cuanto a los requerimientos opcionales
 
-1. Implementé la internacionalización utilizando la librería _i18next_ , el cambio de lenguaje se puede hacer haciendo click sobre el select y seleccionando el idioma deseado
+1. Implementé la internacionalización utilizando la librería _react-intl_ , el cambio de lenguaje se puede hacer haciendo click sobre el select y seleccionando el idioma deseado
    ![image](https://github.com/user-attachments/assets/c0bed3ce-eadb-4a8b-9a12-faec8263a5e1)
 
-2. Se implementó el envío de correos con Resend y React-email, el usuario debe ingresar su correo en el formulario, dar click a sendEmail y se enviará un orreo haciendo usod e Resend y un template de react-email el cual contiene una URL con un token de verificación, al usuario abrir el correo e ingresar a dicho link se ejecuta una función que verifica el token y se procede a actualizar el campo EmailVerified del usuario en la base de datos, es importante destacar la limitación que presenta resend en su formato gratuito en el cual me registré, por la cual solamente se permite enviar correos al campo registrado en la api
+2. Se implementó el envío de correos con Resend y React-email, se accede a dicha página al darle click a la opción Confirm Email, se muestra un formulario en el cual el usuario debe ingresar su correo en el formulario, dar click a sendEmail y se enviará un correo haciendo uso de Resend y un template de react-email el cual contiene una URL con un token de verificación, al usuario abrir el correo e ingresar a dicho link se ejecuta una función que verifica el token y se procede a actualizar el campo EmailVerified del usuario en la base de datos, es importante destacar la limitación que presenta resend en su formato gratuito en el cual me registré para obtener la APIKEY de resend, por la cual solamente se permite enviar correos al campo registrado para generar la APIKEY es decir solamente se enviarán correos al correo usado para generar la APIKEY en RESEND
 
 ![image](https://github.com/user-attachments/assets/312c5841-5c0d-4159-aa5e-5cbd43a2a6d8)
 
