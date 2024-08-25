@@ -26,6 +26,7 @@ const NavBar = ({ withAuth, navBarOptions }: NavBarProps) => {
       <nav className="ml-auto flex gap-4 items-center">
         {navBarOptions.map(({ label, url, style }) => (
           <Link
+            key={label}
             className={`${
               style == "button"
                 ? "text-sm font-medium hover:bg-blue-400 transition bg-blue-300 py-1 px-4 rounded-2xl text-white underline-offset-4"
