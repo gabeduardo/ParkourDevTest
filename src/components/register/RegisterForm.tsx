@@ -51,7 +51,9 @@ const RegisterForm = () => {
       />
 
       {errors.username && (
-        <span className="text-red-500 text-xs">{errors.username.message}</span>
+        <span className="text-red-500 text-xs">
+          <>{errors.username.message}</>
+        </span>
       )}
 
       <label htmlFor="email" className="text-slate-500 mb-2 block text-sm">
@@ -69,7 +71,9 @@ const RegisterForm = () => {
         placeholder="user@email.com"
       />
       {errors.email && (
-        <span className="text-red-500 text-xs">{errors.email.message}</span>
+        <span className="text-red-500 text-xs">
+          <>{errors.email.message}</>
+        </span>
       )}
 
       <label htmlFor="password" className="text-slate-500 mb-2 block text-sm">
@@ -87,7 +91,9 @@ const RegisterForm = () => {
         placeholder="********"
       />
       {errors.password && (
-        <span className="text-red-500 text-sm">{errors.password.message}</span>
+        <span className="text-red-500 text-sm">
+          <>{errors.password.message}</>
+        </span>
       )}
 
       <label
@@ -109,7 +115,7 @@ const RegisterForm = () => {
       />
       {errors.confirmPassword && (
         <span className="text-red-500 text-sm">
-          {errors.confirmPassword.message}
+          <>{errors.confirmPassword.message}</>
         </span>
       )}
       <div className="w-full flex items-center justify-center">

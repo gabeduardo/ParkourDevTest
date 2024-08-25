@@ -28,7 +28,7 @@ export const updateRecord = async (id: RecordId, record: UpdateRecordParams) => 
   const { id: recordId } = recordIdSchema.parse({ id });
   const newRecord = updateRecordSchema.parse({ ...record, userId: session?.user.id! });
   try {
-    const r = await db.record.update({ where: { id: recordId, userId: session?.user.id! }, data: newRecord})
+    const r = await db.record.update({ where: { id: recordId }, data: newRecord})
     return { record: r };
   } catch (err) {
     const message = (err as Error).message ?? "Error, please try again";

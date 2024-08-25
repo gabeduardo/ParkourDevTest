@@ -1,12 +1,17 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { verify } from 'jsonwebtoken';
+import { JwtPayload, verify } from 'jsonwebtoken';
 import { db } from "@/lib/db/index";
 import { NextResponse } from 'next/server';
 
+interface CustomJwtPayload extends JwtPayload {
+  userId: string;
+}
+
 export async function GET(req: Request) {
-  console.log('verificando', req.url);
+  const host= req.headers.get('host')
+  const url = new URL(req.url, `http://${host}`);
+  console.log('verificando', host);
   
-  const url = new URL(req.url, `http://${req.headers.host}`);
   const token = url.searchParams.get('token');
   // console.log('TOKENSITO', tokensito)
   // if (!req.query) {
@@ -16,10 +21,10 @@ export async function GET(req: Request) {
   // const { token } = req.query;
 
   try {
-    const { userId } = verify(token as string, 'tu_secreto');
-    console.log("VERIFICANDO EL METODO DE VERIFICACION", userId);
+    const decoded = verify(token as string, 'tu_secreto') as CustomJwtPayload;
+    console.log("VERIFICANDO EL METODO DE VERIFICACION", decoded.userId);
     await db.user.update({
-      where: { id: userId },
+      where: { id: decoded.userId },
       data: { emailVerified: new Date() },
     });
     return NextResponse.redirect(new URL('/dashboard', req.url));
