@@ -2,17 +2,22 @@
 import MobileNavbar from "./MobileNavbar";
 import NavBar, { NavBarOptions } from "./Navbar";
 
-const navBarOptions: NavBarOptions[] = [
-  { label: "Dashboard", url: "/dashboard", style: "text" },
-  { label: "Records", url: "/records", style: "text" },
-  { label: "Reports", url: "/reports", style: "text" },
-];
+export type UserAccount = {
+  id: string;
+  name?: string;
+  email?: string;
+};
 
-const AppBar = () => {
+interface AppBarProps {
+  navBarOptions: NavBarOptions[];
+  user: UserAccount;
+}
+
+const AppBar = ({ user, navBarOptions }: AppBarProps) => {
   return (
     <>
       <div className="hidden md:block w-full">
-        <NavBar withAuth navBarOptions={navBarOptions} />
+        <NavBar withAuth navBarOptions={navBarOptions} user={user} />
       </div>
       <MobileNavbar navBarOptions={navBarOptions} />
     </>

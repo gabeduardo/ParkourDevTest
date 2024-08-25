@@ -2,46 +2,26 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
 import { LucideIcon } from "lucide-react";
-
 import { cn } from "@/lib/utils";
-import { defaultLinks, additionalLinks } from "@/config/nav";
+import { NavBarOptions } from "./Navbar";
 
-export interface SidebarLink {
-  title: string;
-  href: string;
-  icon: LucideIcon;
-}
-
-const SidebarItems = () => {
-  return (
-    <>
-      <SidebarLinkGroup links={defaultLinks} />
-      {additionalLinks.length > 0
-        ? additionalLinks.map((l) => (
-            <SidebarLinkGroup
-              links={l.links}
-              title={l.title}
-              border
-              key={l.title}
-            />
-          ))
-        : null}
-    </>
-  );
-};
-export default SidebarItems;
-
-const SidebarLinkGroup = ({
-  links,
-  title,
-  border,
-}: {
-  links: SidebarLink[];
+export interface SidebarItemsOptions {
+  navBarOptions: NavBarOptions[];
   title?: string;
   border?: boolean;
-}) => {
+}
+
+export interface SidebarLinkProps {
+  navBarOption: NavBarOptions;
+  active: boolean;
+}
+
+const SidebarItems = ({
+  navBarOptions,
+  title,
+  border,
+}: SidebarItemsOptions) => {
   const fullPathname = usePathname();
   const pathname = "/" + fullPathname.split("/")[1];
 
@@ -53,25 +33,23 @@ const SidebarLinkGroup = ({
         </h4>
       ) : null}
       <ul>
-        {links.map((link) => (
-          <li key={link.title}>
-            <SidebarLink link={link} active={pathname === link.href} />
+        {navBarOptions?.map((navBarOption) => (
+          <li key={navBarOption.label}>
+            <SidebarLink
+              navBarOption={navBarOption}
+              active={pathname === navBarOption.url}
+            />
           </li>
         ))}
       </ul>
     </div>
   );
 };
-const SidebarLink = ({
-  link,
-  active,
-}: {
-  link: SidebarLink;
-  active: boolean;
-}) => {
+const SidebarLink = ({ navBarOption, active }: SidebarLinkProps) => {
+  const { url, label } = navBarOption;
   return (
     <Link
-      href={link.href}
+      href={url}
       className={`group transition-colors p-2 inline-block hover:bg-popover hover:text-primary text-muted-foreground text-xs hover:shadow rounded-md w-full${
         active ? " text-primary font-semibold" : ""
       }`}
@@ -83,9 +61,11 @@ const SidebarLink = ({
             active ? "opacity-100" : ""
           )}
         />
-        <link.icon className="h-3.5 mr-1" />
-        <span>{link.title}</span>
+        {/* <link.icon className="h-3.5 mr-1" /> */}
+        <span>{label}</span>
       </div>
     </Link>
   );
 };
+
+export default SidebarItems;

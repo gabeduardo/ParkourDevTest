@@ -13,17 +13,14 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react";
+import { ArrowUpDown, ChevronDown } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
@@ -36,42 +33,10 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { CambiarPropiedad, CompleteRecord } from "@/lib/db/schema/records";
-import { record } from "zod";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useIntl, FormattedMessage } from "react-intl";
 
 type CompleteRecordTable = CambiarPropiedad<CompleteRecord, "salario", string>;
-
-// const data: CompleteRecordTable[] = [
-//   {
-//     id: "cm04f3yde011368tl7z2ri994",
-//     nombre: "Yina Calderon",
-//     cedula: "7-598-011",
-//     telefono: "64091415",
-//     direccion: "city pan ",
-//     salario: "1100",
-//     userId: "cm04eztsk001068tlqob372fl",
-//   },
-//   {
-//     id: "cm04f4o32020968tllbi2dggh",
-//     nombre: "Raquel Castillo",
-//     cedula: "3-478-959",
-//     telefono: "5454149",
-//     direccion: "city panama",
-//     salario: "700",
-//     userId: "cm04eztsk001068tlqob372fl",
-//   },
-//   {
-//     id: "cm04f5m54029568tltt7r704g",
-//     nombre: "Jonathan Gonzalez",
-//     cedula: "3-848-655",
-//     telefono: "5532184",
-//     direccion: "caracas",
-//     salario: "1400",
-//     userId: "cm04eztsk001068tlqob372fl",
-//   },
-// ];
 
 export const columns: ColumnDef<CompleteRecordTable>[] = [
   {
@@ -82,7 +47,7 @@ export const columns: ColumnDef<CompleteRecordTable>[] = [
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Cedula
+          <FormattedMessage id={"identifier"} />
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
@@ -90,23 +55,65 @@ export const columns: ColumnDef<CompleteRecordTable>[] = [
   },
   {
     accessorKey: "nombre",
-    header: "Nombre",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          <FormattedMessage id={"name"} />
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
   },
   {
     accessorKey: "telefono",
-    header: "Teléfono",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          <FormattedMessage id={"telephone"} />
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
   },
   {
     accessorKey: "direccion",
-    header: "Dirección",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          <FormattedMessage id={"address"} />
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
   },
   {
     accessorKey: "salario",
-    header: "Salario",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          <FormattedMessage id={"salary"} />
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
   },
   {
     id: "actions",
-    header: "Actions",
+    header: ({ column }) => {
+      return <FormattedMessage id={"actions"} />;
+    },
     cell: ({ row }) => (
       <Button variant={"link"} asChild>
         <Link href={"/records/" + row.original.id}>Edit</Link>
@@ -151,11 +158,10 @@ export function RecordTable({ records }: { records: CompleteRecordTable[] }) {
 
   return (
     <div className="w-full">
-      {formatMessage({ id: "welcome" })}
       <div className="flex items-center py-4">
         <div className="flex gap-2">
           <Input
-            placeholder="Filtrar..."
+            placeholder={`${formatMessage({ id: "filter_action" })}...`}
             value={(table.getColumn(filter)?.getFilterValue() as string) ?? ""}
             onChange={(event) =>
               table.getColumn(filter)?.setFilterValue(event.target.value)

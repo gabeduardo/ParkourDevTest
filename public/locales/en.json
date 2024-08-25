@@ -8,5 +8,12 @@
   "register_average": "Average",
   "register_register_message": "Register",
   "register_signout": "Sign out",
-  "register_session_dashboard_message": " Signed in as"
+  "register_session_dashboard_message": " Signed in as",
+  "identifier": "Identifier",
+  "name": "Name",
+  "telephone": "Telephone",
+  "address": "Address",
+  "salary": "Salary",
+  "actions": "Actions",
+  "filter_action": "Filter"
 }

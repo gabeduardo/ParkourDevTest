@@ -8,5 +8,12 @@
   "register_average": "Promedio",
   "register_register_message": "Registrarse",
   "register_signout": "Cerrar sesión",
-  "register_session_dashboard_message": " Sesión iniciada como"
+  "register_session_dashboard_message": " Sesión iniciada como",
+  "identifier": "Cédula",
+  "name": "Nombre",
+  "telephone": "Teléfono",
+  "address": "Dirección",
+  "salary": "Salario",
+  "actions": "Acciones",
+  "filter_action": "Filtrar"
 }
