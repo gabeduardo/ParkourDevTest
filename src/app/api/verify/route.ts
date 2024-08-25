@@ -3,7 +3,7 @@ import { verify } from 'jsonwebtoken';
 import { db } from "@/lib/db/index";
 import { NextResponse } from 'next/server';
 
-export async function GET(req: NextApiRequest, res: NextApiResponse) {
+export async function GET(req: Request) {
   console.log('verificando', req.url);
   
   const url = new URL(req.url, `http://${req.headers.host}`);
