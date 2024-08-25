@@ -19,8 +19,6 @@ type TOpenModal = (record?: Record) => void;
 export default function RecordList({ records }: { records: CompleteRecord[] }) {
   const { optimisticRecords, addOptimisticRecord } =
     useOptimisticRecords(records);
-  console.log("records", records);
-
   const [open, setOpen] = useState(false);
   const [activeRecord, setActiveRecord] = useState<Record | null>(null);
   const openModal = (record?: Record) => {

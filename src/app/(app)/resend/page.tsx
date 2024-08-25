@@ -8,17 +8,13 @@ import { useSession } from "next-auth/react";
 type FormInput = z.infer<typeof emailSchema>;
 type Errors = { [K in keyof FormInput]: string[] };
 
-export default function Home() {
+export default function ResendEmail() {
   const { data } = useSession();
   const [sending, setSending] = useState(false);
   const [errors, setErrors] = useState<Errors | null>(null);
   const nameInputRef = useRef<HTMLInputElement>(null);
   const emailInputRef = useRef<HTMLInputElement>(null);
-  console.log(data);
-  // if (!data.session) {
-  //   alert("You need to be logged in to send an email.");
-  //   return;
-  // }
+
   const sendEmail = async () => {
     setSending(true);
     setErrors(null);
@@ -28,7 +24,6 @@ export default function Home() {
         email: emailInputRef.current?.value,
         userId: data?.user.id,
       });
-      console.log(payload);
       const req = await fetch("/api/email", {
         method: "POST",
         body: JSON.stringify(payload),
@@ -36,8 +31,8 @@ export default function Home() {
           "Content-Type": "application/json",
         },
       });
-      const { id } = await req.json();
-      if (id) alert("Successfully sent!");
+      const response = await req.json();
+      if (response?.data?.id) alert("Successfully sent!");
     } catch (err) {
       if (err instanceof z.ZodError) {
         setErrors(err.flatten().fieldErrors as Errors);

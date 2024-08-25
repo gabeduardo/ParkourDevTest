@@ -24,7 +24,7 @@ export type NavBarOptions = {
 interface NavBarProps {
   withAuth?: boolean;
   navBarOptions: NavBarOptions[];
-  user: UserAccount;
+  user?: UserAccount;
 }
 
 const NavBar = ({ withAuth, navBarOptions, user }: NavBarProps) => {
@@ -51,7 +51,7 @@ const NavBar = ({ withAuth, navBarOptions, user }: NavBarProps) => {
           </Link>
         ))}
         <LanguageSelector />
-        {withAuth && (
+        {withAuth && user && (
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button className="bg-transparent w-fit p-0 hover:bg-transparent focus:bg-none focus:shadow-none border-none focus-visible:shadow-none focus-visible:border-none">

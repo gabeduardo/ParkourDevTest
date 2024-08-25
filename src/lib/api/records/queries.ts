@@ -34,12 +34,3 @@ export const createSalaryReport = async (n: number) => {
     records: topNSalaries,
   };
 };
-
-
-// // consulta y llamaod de la fcion 
-// createSalaryReport().then(report => {
-//   console.log("Salario promedio:", report.averageSalary);
-//   console.log("Registros:", report.records);
-// }).catch(error => {
-//   console.error("Error al crear el reporte:", error);
-// });

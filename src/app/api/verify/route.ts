@@ -8,20 +8,10 @@ interface CustomJwtPayload extends JwtPayload {
 
 export async function GET(req: Request) {
   const host = req.headers.get('host');
-  const url = new URL(req.url, `http://${host}`);
-  console.log('verificando', host);
-  
+  const url = new URL(req.url, `http://${host}`);  
   const token = url.searchParams.get('token');
-  // console.log('TOKENSITO', tokensito)
-  // if (!req.query) {
-  //   return res.send('Falta el token en la solicitud');
-  // }
-  console.log('EL TOKEN ES', token)
-  // const { token } = req.query;
-
   try {
     const decoded = verify(token as string, 'tu_secreto') as CustomJwtPayload;
-    console.log("VERIFICANDO EL METODO DE VERIFICACION", decoded.userId);
     await db.user.update({
       where: { id: decoded.userId },
       data: { emailVerified: new Date() },

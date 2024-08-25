@@ -61,7 +61,6 @@ const SidebarLink = ({ navBarOption, active }: SidebarLinkProps) => {
             active ? "opacity-100" : ""
           )}
         />
-        {/* <link.icon className="h-3.5 mr-1" /> */}
         <span>{label}</span>
       </div>
     </Link>

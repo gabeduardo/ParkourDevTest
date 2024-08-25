@@ -9,6 +9,7 @@ const navBarOptions: NavBarOptions[] = [
   { label: "Dashboard", url: "/dashboard", style: "text" },
   { label: "Records", url: "/records", style: "text" },
   { label: "Reports", url: "/reports", style: "text" },
+  { label: "Confirm Email", url: "/resend", style: "text" },
 ];
 
 export default async function AppLayout({
@@ -21,8 +22,6 @@ export default async function AppLayout({
   const { user }: any = session.session;
 
   if (!user?.name || user.name.length == 0) return null;
-
-  console.log("holi", navBarOptions);
   return (
     <main>
       <NextAuthProvider>
