@@ -1,4 +1,4 @@
-import NavBar, { NavBarOptions } from "@/components/NavBar";
+import NavBar, { NavBarOptions } from "../components/NavBar";
 import Footer from "./shared/Footer";
 
 const navBarOptions: NavBarOptions[] = [

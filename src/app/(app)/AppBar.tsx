@@ -1,6 +1,6 @@
 "use client";
 import MobileNavbar from "@/components/MobileNavbar";
-import NavBar, { NavBarOptions } from "@/components/NavBar";
+import NavBar, { NavBarOptions } from "../../components/NavBar";
 
 const navBarOptions: NavBarOptions[] = [
   { label: "Dashboard", url: "/dashboard", style: "text" },
