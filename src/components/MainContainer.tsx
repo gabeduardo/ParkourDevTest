@@ -1,5 +1,5 @@
-import NavBar, { NavBarOptions } from "../components/NavBar";
-import Footer from "./shared/Footer";
+import NavBar, { NavBarOptions } from "./NavBar";
+import Footer from "./Footer";
 
 const navBarOptions: NavBarOptions[] = [
   { label: "register_action", url: "/", style: "text" },

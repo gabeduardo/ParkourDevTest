@@ -2,7 +2,7 @@ import { checkAuth } from "@/lib/auth/utils";
 import { Toaster } from "@/components/ui/sonner";
 import Sidebar from "@/components/Sidebar";
 import NextAuthProvider from "@/lib/auth/Provider";
-import AppBar from "./AppBar";
+import AppBar from "../../components/AppBar";
 export default async function AppLayout({
   children,
 }: {

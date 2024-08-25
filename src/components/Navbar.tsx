@@ -9,10 +9,10 @@ export type NavBarOptions = {
   style?: "text" | "button";
 };
 
-type NavBarProps = {
+interface NavBarProps {
   withAuth?: boolean;
   navBarOptions: NavBarOptions[];
-};
+}
 
 const NavBar = ({ withAuth, navBarOptions }: NavBarProps) => {
   return (
