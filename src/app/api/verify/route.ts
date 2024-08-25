@@ -1,4 +1,3 @@
-import { NextApiRequest, NextApiResponse } from 'next';
 import { JwtPayload, verify } from 'jsonwebtoken';
 import { db } from "@/lib/db/index";
 import { NextResponse } from 'next/server';
@@ -8,7 +7,7 @@ interface CustomJwtPayload extends JwtPayload {
 }
 
 export async function GET(req: Request) {
-  const host= req.headers.get('host')
+  const host = req.headers.get('host');
   const url = new URL(req.url, `http://${host}`);
   console.log('verificando', host);
   
