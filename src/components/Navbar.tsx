@@ -1,45 +1,64 @@
 "use client";
-
 import Link from "next/link";
-import { useState } from "react";
-import { usePathname } from "next/navigation";
+import LanguageSelector from "./shared/LanguageSelector";
+import { FormattedMessage } from "react-intl";
 
-import { Button } from "@/components/ui/button";
+export type NavBarOptions = {
+  label: string;
+  url: string;
+  style?: "text" | "button";
+};
 
-import { AlignRight } from "lucide-react";
-import { defaultLinks } from "@/config/nav";
+type NavBarProps = {
+  withAuth?: boolean;
+  navBarOptions: NavBarOptions[];
+};
 
-export default function Navbar() {
-  const [open, setOpen] = useState(false);
-  const pathname = usePathname();
+const NavBar = ({ withAuth, navBarOptions }: NavBarProps) => {
   return (
-    <div className="md:hidden border-b mb-4 pb-2 w-full">
-      <nav className="flex justify-between w-full items-center">
-        <div className="font-semibold text-lg">Logo</div>
-        <Button variant="ghost" onClick={() => setOpen(!open)}>
-          <AlignRight />
-        </Button>
+    <header className="px-4 lg:px-6 h-14 flex items-center bg-slate-100 border-b">
+      {!withAuth && (
+        <Link className="flex items-center justify-center" href="/dashboard">
+          <MountainIcon className="h-6 w-6" />
+          <span className="sr-only">Acme Inc</span>
+        </Link>
+      )}
+      <nav className="ml-auto flex gap-4 items-center">
+        {navBarOptions.map(({ label, url, style }) => (
+          <Link
+            className={`${
+              style == "button"
+                ? "text-sm font-medium hover:bg-blue-400 transition bg-blue-300 py-1 px-4 rounded-2xl text-white underline-offset-4"
+                : "text-sm font-medium transition-all opacity-70 hover:opacity-100 underline-offset-4"
+            }`}
+            href={url}
+          >
+            <FormattedMessage id={label} />
+          </Link>
+        ))}
+        <LanguageSelector />
       </nav>
-      {open ? (
-        <div className="my-4 p-4 bg-muted">
-          <ul className="space-y-2">
-            {defaultLinks.map((link) => (
-              <li key={link.title} onClick={() => setOpen(false)} className="">
-                <Link
-                  href={link.href}
-                  className={
-                    pathname === link.href
-                      ? "text-primary hover:text-primary font-semibold"
-                      : "text-muted-foreground hover:text-primary"
-                  }
-                >
-                  {link.title}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ) : null}
-    </div>
+    </header>
+  );
+};
+
+function MountainIcon(props: any) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="m8 3 4 8 5-5 5 15H2L8 3z" />
+    </svg>
   );
 }
+
+export default NavBar;

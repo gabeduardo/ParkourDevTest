@@ -1,7 +1,6 @@
 "use client";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
-import { FormattedMessage } from "react-intl";
 
 const RegisterForm = () => {
   const {

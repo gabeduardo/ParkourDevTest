@@ -1,28 +1,19 @@
-"use client";
+import NavBar, { NavBarOptions } from "@/components/NavBar";
+import Footer from "./Footer";
 
-const MainContainer = () => {
+const navBarOptions: NavBarOptions[] = [
+  { label: "register_action", url: "/", style: "text" },
+  { label: "login_action", url: "/sign-in", style: "button" },
+];
+
+const MainContainer = ({ children }: any) => {
   return (
     <div className="flex flex-col min-h-screen">
-      <header className="px-4 lg:px-6 h-14 flex items-center">
-        <Link className="flex items-center justify-center" href="#">
-          <MountainIcon className="h-6 w-6" />
-          <span className="sr-only">Acme Inc</span>
-        </Link>
-        <nav className="ml-auto flex gap-4 sm:gap-6">
-          <Link
-            className="text-sm font-medium hover:underline underline-offset-4"
-            href="#features"
-          >
-            Registrarse
-          </Link>
-          <Link
-            className="text-sm font-medium hover:underline underline-offset-4"
-            href="/sign-in"
-          >
-            Iniciar Sesion
-          </Link>
-        </nav>
-      </header>
+      <NavBar navBarOptions={navBarOptions} />
+      <main className="flex-1 w-full grid place-items-center">{children}</main>
+      <Footer />
     </div>
   );
 };
+
+export default MainContainer;

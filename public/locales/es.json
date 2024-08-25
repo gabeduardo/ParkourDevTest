@@ -1,4 +1,5 @@
 {
   "welcome": "Bienvenido",
-  "register_action": "Registrarse"
+  "register_action": "Registrarse",
+  "login_action": "Iniciar Sesión"
 }

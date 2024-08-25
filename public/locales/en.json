@@ -1,4 +1,5 @@
 {
   "welcome": "Welcome",
-  "register_action": "Register"
+  "register_action": "Register",
+  "login_action": "LogIn"
 }

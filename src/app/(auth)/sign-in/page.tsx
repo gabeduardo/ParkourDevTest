@@ -1,21 +1,22 @@
 "use client";
 
+import FormWrapper from "@/components/shared/FormWrapper";
+import MainContainer from "@/components/shared/MainContainer";
 import { signIn } from "next-auth/react";
 
-const Page = () => {
+const Login = () => {
   return (
-    <main className="bg-popover max-w-lg mx-auto my-4 rounded-lg p-10">
-      <h1 className="text-2xl font-bold text-center">Iniciar Sesión</h1>
-      <div className="mt-4">
+    <MainContainer>
+      <FormWrapper title="login_action">
         <button
+          className="w-full md:w-auto px-6 bg-blue-500 text-white p-3 rounded-lg mt-2"
           onClick={() => signIn("google", { callbackUrl: "/dashboard" })}
-          className="w-full bg-primary text-primary-foreground text-center hover:opacity-90 font-medium px-4 py-2 rounded-lg block"
         >
           Iniciar Sesión
         </button>
-      </div>
-    </main>
+      </FormWrapper>
+    </MainContainer>
   );
 };
 
-export default Page;
+export default Login;
