@@ -1,7 +1,7 @@
 "use client";
 
 import FormWrapper from "@/components/shared/FormWrapper";
-import MainContainer from "@/components/shared/MainContainer";
+import MainContainer from "@/components/MainContainer";
 import { signIn } from "next-auth/react";
 
 const Login = () => {
